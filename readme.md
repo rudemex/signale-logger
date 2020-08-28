@@ -446,7 +446,7 @@ The following illustrates all the available options with their respective defaul
 
 ```json
 {
-  "signale": {
+  "signale-logger": {
     "displayScope": true,
     "displayBadge": true,
     "displayDate": false,
