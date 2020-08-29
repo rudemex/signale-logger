@@ -505,6 +505,13 @@ Display the name of the file that the logger is reporting from.
 
 Display the line of the file that the logger is reporting from.
 
+##### `displayColumn`
+
+- Type: `Boolean`
+- Default: `false`
+
+Display the column of the file that the logger is reporting from.
+
 ##### `displayLabel`
 
 - Type: `Boolean`
