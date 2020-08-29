@@ -7,6 +7,7 @@ logger1.config({
   displayTimestamp: true,
   displayDate: true,
   displayLine: true,
+  displayColumn:true,
   timeZone: "America/Argentina/Buenos_Aires",
   formatDate: "DD-MM-YYYY",
   formatTime: "HH:mm:ss a"

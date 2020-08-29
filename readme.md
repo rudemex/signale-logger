@@ -452,6 +452,7 @@ The following illustrates all the available options with their respective defaul
     "displayDate": false,
     "displayFilename": false,
     "displayLine": false,
+    "displayColumn": false,
     "displayLabel": true,
     "displayTimestamp": false,
     "underlineLabel": true,

@@ -57,6 +57,7 @@
       "displayDate": false,
       "displayFilename": false,
       "displayLine": true,
+      "displayColumn": false,
       "displayLabel": true,
       "displayTimestamp": false,
       "underlineLabel": true,

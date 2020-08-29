@@ -63,6 +63,7 @@ declare namespace _signale {
     displayDate?: boolean;
     displayFilename?: boolean;
     displayLine?: boolean;
+    displayColumn?: boolean;
     displayLabel?: boolean;
     displayScope?: boolean;
     displayTimestamp?: boolean;

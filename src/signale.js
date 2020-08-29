@@ -99,6 +99,27 @@ class Signale {
     return firstExternalFileLine ? firstExternalFileLine.line : '';
   }
 
+  get fileColumn() {
+    const _ = Error.prepareStackTrace;
+    Error.prepareStackTrace = (error, stack) => stack;
+    const {stack} = new Error();
+    Error.prepareStackTrace = _;
+
+    const callers = stack.map(x => x.getFileName());
+    const callersAndColumns = stack.map(x => {
+      return {
+        name: x.getFileName(),
+        column: x.getColumnNumber()
+      };
+    });
+
+    const firstExternalFileColumn = callersAndColumns.find(x => {
+      return x.name !== callers[0];
+    });
+
+    return firstExternalFileColumn ? firstExternalFileColumn.column : '';
+  }
+
   get packageConfiguration() {
     return pkgConf.sync(namespace, {defaults});
   }
@@ -173,8 +194,8 @@ class Signale {
     return `[${this.date}]`;
   }
 
-  _formatFilename(displayLine) {
-    return `[${this.filename}${displayLine ? `:${this.fileLine}` : ''}]`;
+  _formatFilename(displayLine,displayColumn) {
+    return `[${this.filename}${displayLine ? `:${this.fileLine}` : ''}${displayColumn ? `:${this.fileColumn}`: ''}]`;
   }
 
   _formatScopeName() {
@@ -206,7 +227,7 @@ class Signale {
     }
 
     if (this._config.displayFilename) {
-      meta.push(this._formatFilename(this._config.displayLine));
+      meta.push(this._formatFilename(this._config.displayLine, this._config.displayColumn));
     }
 
     if (this._scopeName.length !== 0 && this._config.displayScope) {
