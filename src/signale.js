@@ -10,6 +10,13 @@ const pkg = require('./../package.json');
 const defaultTypes = require('./types');
 
 const {green, grey, red, underline, yellow} = chalk;
+const defaultLogLevels = {
+  debug: 0,
+  info: 1,
+  timer: 2,
+  warn: 3,
+  error: 4
+};
 
 let isPreviousLogInteractive = false;
 const defaults = pkg.options.default;
@@ -129,13 +136,7 @@ class Signale {
   }
 
   get _logLevels() {
-    return {
-      info: 0,
-      timer: 1,
-      debug: 2,
-      warn: 3,
-      error: 4
-    };
+    return this._config.logLevels ? this._config.logLevels : defaultLogLevels;
   }
 
   set configuration(configObj) {
@@ -157,7 +158,7 @@ class Signale {
   }
 
   _validateLogLevel(level) {
-    return Object.keys(this._logLevels).includes(level) ? level : 'info';
+    return Object.keys(this._logLevels).includes(level) ? level : 'debug';
   }
 
   _mergeTypes(standard, custom) {

@@ -44,6 +44,9 @@ Come over to [Gitter](https://gitter.im/klaussinani/signale) or [Twitter](https:
 - Interactive and regular modes
 - Secrets & sensitive information filtering
 - Filename, date and timestamp support
+- Date and time formatting 
+- Time Zone Settings
+- Row and Column display of Log
 - Scoped loggers and timers
 - Scaled logging levels mechanism
 - String interpolation support
@@ -95,6 +98,7 @@ Import signale and start using any of the default loggers.
 - `complete`
 - `error`
 - `debug`
+- `alert`
 - `fatal`
 - `fav`
 - `info`
@@ -138,7 +142,7 @@ const {Signale} = require('signale-logger');
 const options = {
   disabled: false,
   interactive: false,
-  logLevel: 'info',
+  logLevel: 'debug',
   scope: 'custom',
   secrets: [],
   stream: process.stdout,
@@ -147,13 +151,13 @@ const options = {
       badge: '**',
       color: 'yellow',
       label: 'reminder',
-      logLevel: 'info'
+      logLevel: 'debug'
     },
     santa: {
       badge: '🎅',
       color: 'red',
       label: 'santa',
-      logLevel: 'info'
+      logLevel: 'debug'
     }
   }
 };
@@ -217,11 +221,12 @@ Switches all loggers belonging to the created instance into the interactive mode
 ##### `logLevel`
 
 - Type: `String`
-- Default: `'info'`
+- Default: `'debug'`
 
 Sets the general logging level of the created instance. Can be one of the following:
 
-- `'info'` - Displays all messages from all loggers.
+- `'debug'` - Displays all messages from all loggers.
+- `'info'` - Displays messages from all loggers except `debug` level.
 - `'timer'` -  Displays messages only from the `time`, `timeEnd`, `debug`, `warn`, `error` & `fatal` loggers.
 - `'debug'` - Displays messages only from the `debug`, `warn`, `error` & `fatal` loggers.
 - `'warn'` - Displays messages only from the `warn`, `error` & `fatal` loggers.
@@ -276,7 +281,7 @@ The color of the label, can be any of the foreground colors supported by [chalk]
 ##### `logLevel`
 
 - Type: `String`
-- Default: `'info'`
+- Default: `'debug'`
 
 The log level corresponding to the logger. Messages originating from the logger are displayed only if the log level is greater or equal to the above described general logging level `logLevel` of the `Signale` instance.
 
@@ -451,7 +456,7 @@ The following illustrates all the available options with their respective defaul
     "displayBadge": true,
     "displayDate": false,
     "displayFilename": false,
-    "displayLine": false,
+    "displayLine": true,
     "displayColumn": false,
     "displayLabel": true,
     "displayTimestamp": false,
@@ -462,7 +467,14 @@ The following illustrates all the available options with their respective defaul
     "uppercaseLabel": false,
     "timeZone": "America/Argentina/Buenos_Aires",
     "formatDate": "YYYY-MM-DD",
-    "formatTime": "HH:mm:ss"
+    "formatTime": "HH:mm:ss a",
+    "logLevels": {
+      "debug": 0,
+      "info": 1,
+      "timer": 2,
+      "warn": 3,
+      "error": 4
+    }
   }
 }
 ```
@@ -581,6 +593,23 @@ Setting to format the date. [List of formats](https://momentjs.com/docs/#/displa
 - Default: `HH:mm:ss a`
 
 Setting to format the time. [List of formats](https://momentjs.com/docs/#/displaying/format/)
+
+##### `logLevels`
+
+- Type: `Object`
+- Default: 
+```json5
+{
+  debug: 0,
+  info: 1,
+  timer: 2,
+  warn: 3,
+  error: 4
+}
+```
+From this object, you can configure the log levels and also create your own levels by overwriting the default levels.
+
+For example, a value of `{ silly: -1 }` will add a level of `silly`, which will have even lower priority than `debug`.
 
 </details>
 

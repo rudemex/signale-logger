@@ -67,7 +67,14 @@
       "uppercaseLabel": false,
       "timeZone": "America/Argentina/Buenos_Aires",
       "formatDate": "YYYY-MM-DD",
-      "formatTime": "HH:mm:ss a"
+      "formatTime": "HH:mm:ss a",
+      "logLevels": {
+        "debug": 0,
+        "info": 1,
+        "timer": 2,
+        "warn": 3,
+        "error": 4
+      }
     }
   },
   "xo": {
