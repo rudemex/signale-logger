@@ -195,8 +195,8 @@ class Signale {
     return `[${this.date}]`;
   }
 
-  _formatFilename(displayLine,displayColumn) {
-    return `[${this.filename}${displayLine ? `:${this.fileLine}` : ''}${displayColumn ? `:${this.fileColumn}`: ''}]`;
+  _formatFilename(displayLine, displayColumn) {
+    return `[${this.filename}${displayLine ? `:${this.fileLine}` : ''}${displayColumn ? `:${this.fileColumn}` : ''}]`;
   }
 
   _formatScopeName() {
