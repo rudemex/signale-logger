@@ -19,8 +19,6 @@ const defaultLogLevels = {
 };
 
 let isPreviousLogInteractive = false;
-let scopeList = {};
-let startDy = -1;
 const defaults = pkg.options.default;
 const namespace = pkg.name;
 
@@ -318,24 +316,15 @@ class Signale {
 
   _write(stream, message) {
 
-    if (!scopeList.hasOwnProperty(this.scopeName)) {
-      scopeList[this.scopeName] = {
-        isPreviousLogInteractive: false,
-        dy: -1//startDy = -1
-      }
-      //startDy--;
-    }
-
-    if (this._interactive && stream.isTTY && scopeList[this.scopeName].isPreviousLogInteractive) {
-      readline.moveCursor(stream, 0, scopeList[this.scopeName].dy);
+    if (this._interactive && stream.isTTY && isPreviousLogInteractive) {
+      readline.moveCursor(stream, 0, -1);
       readline.clearLine(stream);
       readline.cursorTo(stream, 0);
     }
 
-    stream.write(message + '\n');
-    scopeList[this.scopeName].isPreviousLogInteractive = this._interactive;
+    stream.write(`${message}\n`);
+    isPreviousLogInteractive = this._interactive;
 
-    //console.log(scopeList);
 
     /*if (this._interactive && stream.isTTY && isPreviousLogInteractive) {
       readline.moveCursor(stream, 0, -1);

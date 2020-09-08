@@ -1,8 +1,7 @@
 import { Signale, SignaleConstructorOptions } from '../';
 
 const optInteractive: SignaleConstructorOptions = {
-  interactive: true,
-  scope:'scope 1'
+  interactive: true
 };
 
 const interactive = new Signale(optInteractive);
@@ -18,7 +17,7 @@ setTimeout(() => {
   }, 3000);
 }, 2000);
 
-const interactive2 = new Signale({...optInteractive, scope:'scope 2'});
+const interactive2 = new Signale({...optInteractive});
 setTimeout(() => {
   interactive2.info('[%d/3] - interactive2 A', 1);
   setTimeout(() => {
