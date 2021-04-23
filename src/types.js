@@ -30,7 +30,7 @@ module.exports = {
     badge: figures.info,
     color: 'blue',
     label: 'info',
-    logLevel: 'debug'
+    logLevel: 'info'
   },
   star: {
     badge: figures.star,
@@ -54,7 +54,7 @@ module.exports = {
     badge: figures.warning,
     color: 'yellow',
     label: 'warning',
-    logLevel: 'debug'
+    logLevel: 'warn'
   },
   complete: {
     badge: figures.checkboxOn,
